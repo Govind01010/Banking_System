@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
+
+    <style>
+        li{
+            list-style:none;
+        }
+        .card-image-top{
+          width:200px;
+          height:200px;
+        }
+        body
+        {
+          background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+        }
+    </style>
+
+
+
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="container d-flex mt-5">
+        <form class="w-75 m-auto" action="" method="POST">
+            <fieldset >
+              <legend>Transaction</legend>
+                <div class="container-fluid">
+                  <div class="row">
+                
+                    <div class="col-md-6">
+                       <div class="card border-3">
+                         <img src="./Untitled design (4).png " class="card-image-top m-auto" alt="">
+                          <div class="card-body">
+                             <div class="card-title fw-bold fs-5">Customer</div>
+                             <ul class="list-group list-group-flush">
+                              <li class="list-group-item" >Id: &nbsp;&nbsp; <%= customer[0].cust_id %></li>
+                              <li class="list-group-item">Name: &nbsp;&nbsp; <%= customer[0].cust_name %></li>
+                              <li class="list-group-item"> Email:&nbsp;<%= customer[0].cust_emailID %> </li>
+                              <li class="list-group-item">Address:&nbsp;&nbsp;<%= customer[0].cust_address %> </li>
+                              <li class="list-group-item">Balance:&nbsp;&nbsp;<%= customer[0].balance %><i class="bi bi-currency-rupee"></i> </li>
+                            </ul>
+                          </div>
+                       </div>
+                    </div>
+                    <input type="hidden" name="balance" value="<%= customer[0].balance %>">
+                    <input type="hidden" name="id" value="<%= customer[0].cust_id %>">
+                    <div class="col-md-6 d-flex flex-column justify-content-start">
+                      <div class="mb-3">
+                        <label for="amount" class="form-label">Transfer Amount</label>
+                        <input type="number" name="amount" id="amount" class="form-control" placeholder="Enter Amount" required>
+                      </div>
+        
+                      <div class="mb-3">
+                        <label for="Select_customer" class="form-label">Select The Customer Here.</label>
+                        <select id="Select_customer" name="reciver" class="form-select" required>
+
+                          
+                          <% if(senderinfo.length>0){ %>
+                            <% for(var i=0 ; i<senderinfo.length ; i++ ){ %>
+                                <option value="<%- senderinfo[i].c_id %>"><%- senderinfo[i].s_name %></option>
+                                <% } %>
+                        <% }else{ %>
+                            
+                            <h1>customer data not found!</h1>
+                            <% }  %>
+
+                        </select>
+                        <button type="submit" class="btn btn-primary mt-2">Pay</button>
+                      </div>
+        
+                      
+                    </div>
+                  </div>
+                </div>
+
+            </fieldset>
+          </form>
+    </div>
+   
+</body>
+</html>
